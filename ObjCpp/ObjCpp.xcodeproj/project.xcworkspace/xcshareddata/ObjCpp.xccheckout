@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7A7E143D-BEFE-4BAE-AFF6-DBC3AA1A0AD0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ObjCpp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3816FE0E-7019-4C59-8BA2-DC5348D4ECED</key>
+		<string>https://github.com/soundfantastic/ObjCppLambdaBlock.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ObjCpp/ObjCpp.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3816FE0E-7019-4C59-8BA2-DC5348D4ECED</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/soundfantastic/ObjCppLambdaBlock.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3816FE0E-7019-4C59-8BA2-DC5348D4ECED</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3816FE0E-7019-4C59-8BA2-DC5348D4ECED</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ObjCppLambdaBlock</string>
+		</dict>
+	</array>
+</dict>
+</plist>

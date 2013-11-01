@@ -11,35 +11,36 @@
 #include <typeinfo>
 
 typedef void(*function_c)(id,SEL,void*);
+static const int sec = 1;
 
 template <class T>
 class Cpp {
 public:
     Cpp() {
         if(typeid(T) == typeid(ObjCppAppDelegate*)) {
-            SEL selector = NSSelectorFromString(@"test_it:");
-            id result = objc_msgSend([ObjCppAppDelegate class], selector, @"My name is Cpp and i am C++ class");
-            NSLog(@"%@", result);
+                T target = [ObjCppAppDelegate class];
+            NSString* string = [NSString stringWithFormat:@"Cpp says Hello to %@", NSStringFromClass([ObjCppAppDelegate class])];
+                objc_msgSend(target, NSSelectorFromString(@"test_it:"), string);
+        } else {
+            NSLog(@"BANG");
         }
     }
     void Cpp_method(id sender, SEL selector, function_c function) {
         NSLog(@"Hello %s from C++ method", typeid(T).name());
-        sleep(1);
+        sleep(sec);
         function(sender, selector, this);
     }
-private:
-    T object;
 };
 
 void c_function(id sender, SEL selector, void* object) {
     NSLog(@"Hello from C");
-    sleep(1);
+    sleep(sec);
     auto block_function = ^(id sender, SEL selector, void* object) {
         NSLog(@"Hello from Block function");
-        sleep(1);
+        sleep(sec);
         auto lambda_function = [](id sender, SEL selector, void* object) {
             NSLog(@"Hello from Lambda function");
-            sleep(1);
+            sleep(sec);
             objc_msgSend(sender, selector, object); // go back to ObjC
         };
         lambda_function(sender, selector, object);
@@ -52,7 +53,7 @@ void c_function(id sender, SEL selector, void* object) {
 @implementation ObjC
 + (void) ObjC_method:(void*)object {
     NSLog(@"Hello %s from Objective-C method", typeid(object).name());
-    sleep(1);
+    sleep(sec);
     Cpp<ObjCppAppDelegate*>().Cpp_method(self, _cmd, c_function);
 }
 @end
@@ -62,9 +63,8 @@ void c_function(id sender, SEL selector, void* object) {
     [ObjC ObjC_method:NULL];
 }
 
-+ (id) test_it:(NSString*)input {
++ (void) test_it:(NSString*)input {
     NSLog(@"%@", input);
-    return @1234;
 }
 
 @end

@@ -8,18 +8,27 @@
 
 #import "ObjCppAppDelegate.h"
 #import <objc/objc-runtime.h>
- #include <typeinfo>
+#include <typeinfo>
 
 typedef void(*function_c)(id,SEL,void*);
 
 template <class T>
 class Cpp {
 public:
+    Cpp() {
+        if(typeid(T) == typeid(ObjCppAppDelegate*)) {
+            SEL selector = NSSelectorFromString(@"test_it:");
+            id result = objc_msgSend([ObjCppAppDelegate class], selector, @"My name is Cpp and i am C++ class");
+            NSLog(@"%@", result);
+        }
+    }
     void Cpp_method(id sender, SEL selector, function_c function) {
         NSLog(@"Hello %s from C++ method", typeid(T).name());
         sleep(1);
         function(sender, selector, this);
     }
+private:
+    T object;
 };
 
 void c_function(id sender, SEL selector, void* object) {
@@ -44,7 +53,7 @@ void c_function(id sender, SEL selector, void* object) {
 + (void) ObjC_method:(void*)object {
     NSLog(@"Hello %s from Objective-C method", typeid(object).name());
     sleep(1);
-    Cpp<ObjC*>().Cpp_method(self, _cmd, c_function);
+    Cpp<ObjCppAppDelegate*>().Cpp_method(self, _cmd, c_function);
 }
 @end
 
@@ -52,4 +61,10 @@ void c_function(id sender, SEL selector, void* object) {
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification{
     [ObjC ObjC_method:NULL];
 }
+
++ (id) test_it:(NSString*)input {
+    NSLog(@"%@", input);
+    return @1234;
+}
+
 @end
